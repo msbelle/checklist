@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+	<title>List to do</title>
+  </head>
+
+  <style>
+* {
+    box-sizing: border-box;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    height: 1000px; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+
+
+
+</style>
+  
+  
+  
+  
+<body>
+
+
+<script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
+<script>
+  // Initialize Firebase
+(function () {
+    // Initialize Firebase
+    const config = {
+    apiKey: "AIzaSyBCD52rbZrftv5yMjJ4jRz-Xqau6SrR1BY",
+    authDomain: "webapp-314f5.firebaseapp.com",
+    databaseURL: "https://webapp-314f5.firebaseio.com",
+    projectId: "webapp-314f5",
+    storageBucket: "webapp-314f5.appspot.com",
+    messagingSenderId: "920221224369"
+  };
+    firebase.initializeApp(config)
+}())
+const dbRefObject = firebase.database().ref().child('test1')
+console.log(dbRefObject)
+dbRefObject.on('value', snap => {
+      let data = snap.val()
+	  console.log(data)
+  })
+
+  function writeNewPost(text) {
+  // A post entry.
+  var postData = {
+	comment: text
+  };
+
+  // Get a key for a new Post.
+  var newPostKey = firebase.database().ref().child('posts').push().key;
+
+  // Write the new post's data simultaneously in the posts list and the user's post list.
+  var updates = {};
+  updates['/posts/' + newPostKey] = postData;
+  return firebase.database().ref().update(updates);
+}
+</script>
+
+<div class="header" >
+<img src="logo.jpg" width="100%" height="300px" style="float:center;">
+</div>
+    <noscript>
+      You need to enable JavaScript to run this app.
+    </noscript>
+
+
+
+
+<div class="row">
+
+  <div class="column" style="background-color:#FFCC99;">	
+  
+	<div class="clock">
+		<div class="clockFace">
+			<div class="brand">Belle</div>
+			
+			<div class="horizontal">
+				<div class="left">IX</div>
+				<div class="vertical">
+					<div class="top">XII</div>
+					<div class="bottom">VI</div>
+				</div>
+				<div class="right">III</div>
+			</div>
+			<div class="hand handHour"></div>
+			<div class="hand handMin"></div>
+			<div class="hand handSec"></div>
+			<div class="circle"></div>
+		</div>
+	</div>
+
+	<script src="src/index.js">
+	</script>
+<div id="app"></div>
+
+	<script src="src/index.js"></script>
+
+	
+
+	</div>
+	
+	
+	<div class="column" style="background-color:#FFFFCC;">
+
+    <div id="root"></div>
+  </div>
+  
+</div>
+
+	
+	<div class="footer">
+    <h4 style=" text-decoration: underline;">FOLLOW US</h4>
+<br>
+	<a href="https://www.facebook.com/login.php" class="fa fa-facebook"></a>
+<a href="https://twitter.com" class="fa fa-twitter"></a>
+<a href="https://accounts.google.com/signin/v2/identifier?service=accountsettings&passive=1209600&osid=1&continue=https%3A%2F%2Fmyaccount.google.com%2Fintro%3Futm_source%3DOGB%26utm_medium%3Dapp&followup=https%3A%2F%2Fmyaccount.google.com%2Fintro%3Futm_source%3DOGB%26utm_medium%3Dapp&csig=AF-SEnaGQ6gdrORKeVim%3A1543260663&flowName=GlifWebSignIn&flowEntry=ServiceLogin" class="fa fa-google"></a>
+<a href="https://www.instagram.com/" class="fa fa-instagram"></a>
+    </div>
+</body>
+
+</html>
